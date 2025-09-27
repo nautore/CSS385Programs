@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctomqfmuumnpo"]
+[gd_scene load_steps=9 format=3 uid="uid://ctomqfmuumnpo"]
 
 [ext_resource type="Script" uid="uid://jwvlfhrb0ccl" path="res://scripts/game.gd" id="1_onqr8"]
 [ext_resource type="PackedScene" uid="uid://db2pgj3qrk8jv" path="res://scenes/player.tscn" id="1_w5aja"]
+[ext_resource type="PackedScene" uid="uid://b81ajis8jtuvy" path="res://scenes/pause_menu.tscn" id="3_ycayy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w5aja"]
 normal = Vector2(0, 1)
@@ -49,5 +50,9 @@ autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_onqr8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_ycayy")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
