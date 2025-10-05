@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctomqfmuumnpo"]
+
+[ext_resource type="Script" uid="uid://jwvlfhrb0ccl" path="res://scripts/game.gd" id="1_onqr8"]
+[ext_resource type="PackedScene" uid="uid://db2pgj3qrk8jv" path="res://scenes/player.tscn" id="1_w5aja"]
+[ext_resource type="PackedScene" uid="uid://b81ajis8jtuvy" path="res://scenes/pause_menu.tscn" id="3_ycayy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w5aja"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_onqr8"]
+normal = Vector2(0.9998348, 0.018178813)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ycayy"]
+normal = Vector2(-1, 0)
+distance = -944.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bw6k5"]
+distance = -648.0
+
+[sub_resource type="Environment" id="Environment_onqr8"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 0.77
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_onqr8")
+
+[node name="Player" parent="." instance=ExtResource("1_w5aja")]
+position = Vector2(580, 316)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_w5aja")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_onqr8")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(208, 0)
+shape = SubResource("WorldBoundaryShape2D_ycayy")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_bw6k5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_onqr8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_ycayy")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
