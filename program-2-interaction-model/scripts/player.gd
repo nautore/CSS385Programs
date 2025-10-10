@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+var enemiesKilled = 0
 var bullet_scene = preload("res://scenes/bullet.tscn")
 const SPEED = 200
 @onready var is_reloading = false
 @onready var shooty_part = $ShootSource
+@onready var wall = $/root/Game/Wall
+@onready var key = $/root/Game/Key
 
 func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
