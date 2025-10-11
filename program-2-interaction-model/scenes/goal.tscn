@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://boyslv001sooc"]
+
+[ext_resource type="Script" uid="uid://b5fani55qxpuk" path="res://scripts/goal.gd" id="1_jbojv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl315"]
+size = Vector2(10, 683)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbojv"]
+font_size = 30
+font_color = Color(0, 0.83137256, 0, 1)
+
+[node name="Goal" type="Area2D"]
+script = ExtResource("1_jbojv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 331.5)
+shape = SubResource("RectangleShape2D_xl315")
+
+[node name="WinLabel" type="Label" parent="."]
+visible = false
+offset_left = 544.0
+offset_top = 261.0
+offset_right = 671.0
+offset_bottom = 303.0
+text = "You Win!"
+label_settings = SubResource("LabelSettings_jbojv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
